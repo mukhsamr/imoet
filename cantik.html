@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aku Ganteng Kan? 🥺</title>
+<title>Aku Cantik Kan? 🥺</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -368,6 +368,14 @@
   .an-spin   { animation: aSpin   0.42s ease both !important; }
   .an-flip   { animation: aFlip   0.42s ease both !important; }
   .an-shake  { animation: aShake  0.38s ease both !important; }
+
+/* Custom cute cursor */
+body, * {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48dGV4dCB5PScyNicgZm9udC1zaXplPScyNic+8J+MuDwvdGV4dD48L3N2Zz4=") 12 28, auto !important;
+}
+button, a, [onclick], input, textarea, select, label {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48dGV4dCB5PScyNicgZm9udC1zaXplPScyNic+4pyoPC90ZXh0Pjwvc3ZnPg==") 12 28, pointer !important;
+}
 </style>
 </head>
 <body>
@@ -388,7 +396,7 @@
       </div>
       <div class="badge">✨ hei!</div>
     </div>
-    <p class="q-title">Aku ganteng kan? 🥺</p>
+    <p class="q-title">Aku cantik kan? 🥺</p>
     <p class="q-sub">jawab jujur yaaa~</p>
     <button class="btn-yes" onclick="answerYes()">
       <span>Iya dong!</span><span>😍</span>
@@ -578,7 +586,7 @@ function resetGame() {
     '<div class="av-mouth"></div>' +
     '<div class="av-blush l"></div><div class="av-blush r"></div>' +
     '</div><div class="badge">✨ hei!</div></div>' +
-    '<p class="q-title">Aku ganteng kan? 🥺</p>' +
+    '<p class="q-title">Aku cantik kan? 🥺</p>' +
     '<p class="q-sub">jawab jujur yaaa~</p>' +
     '<button class="btn-yes" onclick="answerYes()"><span>Iya dong!</span><span>😍</span></button>' +
     '<div class="no-zone" id="no-zone"><button class="btn-no" id="btn-no">Nggak... 😐</button></div>' +

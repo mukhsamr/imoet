@@ -312,6 +312,14 @@ body::before {
   0%,100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
   50%      { opacity: 0.35; transform: scale(1.1) rotate(180deg); }
 }
+
+/* Custom cute cursor */
+body, * {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48dGV4dCB5PScyNicgZm9udC1zaXplPScyNic+8J+MuDwvdGV4dD48L3N2Zz4=") 12 28, auto !important;
+}
+button, a, [onclick], input, textarea, select, label {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48dGV4dCB5PScyNicgZm9udC1zaXplPScyNic+4pyoPC90ZXh0Pjwvc3ZnPg==") 12 28, pointer !important;
+}
 </style>
 </head>
 <body>
@@ -333,13 +341,13 @@ body::before {
   <div class="app-grid">
 
     <!-- Ganteng -->
-    <a class="app-card pink" href="ganteng.html">
+    <a class="app-card pink" href="cantik.html">
       <div class="app-icon pink">
         🪞
         <div class="icon-badge pink">!</div>
       </div>
       <div class="app-info">
-        <p class="app-name">Aku Ganteng Kan? 🥺</p>
+        <p class="app-name">Aku Cantik Kan? 🥺</p>
         <p class="app-desc">tombol "nggak" bakal kabur terus — bisa kamu tangkap ga? ada 5% chance berhasil loh~</p>
         <div class="app-tags">
           <span class="tag pink">iseng</span>
@@ -368,16 +376,32 @@ body::before {
       <span class="app-arrow">→</span>
     </a>
 
+    <!-- Confess Generator -->
+    <a class="app-card teal" href="confess.html">
+      <div class="app-icon teal">
+        💌
+        <div class="icon-badge teal">♡</div>
+      </div>
+      <div class="app-info">
+        <p class="app-name">Confess Generator 💌</p>
+        <p class="app-desc">isi nama crush kamu, pilih gaya suratnya, dan biarkan kita yang nulisin~ ada 4 gaya!</p>
+        <div class="app-tags">
+          <span class="tag teal">cinta</span>
+          <span class="tag pink">romantis</span>
+          <span class="tag yellow">lucu</span>
+        </div>
+      </div>
+      <span class="app-arrow">→</span>
+    </a>
+
     <!-- Coming soon -->
-    <div class="app-card teal soon">
+    <div class="app-card soon" style="opacity:0.55;pointer-events:none;cursor:default;">
       <span class="soon-chip">🚧 coming soon</span>
-      <div class="app-icon teal">✨</div>
+      <div class="app-icon" style="background:#fce7f3">✨</div>
       <div class="app-info">
         <p class="app-name">Web Lucu Berikutnya</p>
         <p class="app-desc">masih dalam proses, ditunggu yaaa~ 🤭</p>
-        <div class="app-tags">
-          <span class="tag teal">segera</span>
-        </div>
+        <div class="app-tags"><span class="tag pink">segera</span></div>
       </div>
       <span class="app-arrow">→</span>
     </div>
