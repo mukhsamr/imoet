@@ -197,7 +197,8 @@ body::before {
 }
 
 /* ACTION BUTTONS */
-.action-row { display:flex; gap:10px; margin-top:1rem; }
+.action-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:1rem; }
+.action-row .btn-action { flex:1; min-width:120px; font-size:12px; padding:10px 8px; }
 .btn-action {
   flex:1; padding:11px 10px; border-radius:50px;
   font-family:'Nunito',sans-serif; font-size:13px; font-weight:800;
@@ -247,6 +248,7 @@ button, a, [onclick], input, textarea, select, label {
   cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMicgaGVpZ2h0PSczMicgdmlld0JveD0nMCAwIDMyIDMyJz48dGV4dCB5PScyNicgZm9udC1zaXplPScyNic+4pyoPC90ZXh0Pjwvc3ZnPg==") 12 28, pointer !important;
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 <div id="bubbles"></div>
@@ -321,8 +323,9 @@ button, a, [onclick], input, textarea, select, label {
     </div>
     <div class="action-row">
       <button class="btn-action" onclick="generateLetter()">🔄 Ganti versi</button>
-      <button class="btn-action" onclick="copyLetter()">📋 Salin surat</button>
-      <button class="btn-action primary" onclick="shareLetter()">💌 Share!</button>
+      <button class="btn-action" onclick="copyLetter()">📋 Salin teks</button>
+      <button class="btn-action" onclick="downloadImage()">⬇️ Simpan gambar</button>
+      <button class="btn-action primary" id="btn-share-img" onclick="shareImage()">💌 Share!</button>
     </div>
   </div>
 
@@ -454,12 +457,73 @@ function copyLetter() {
   }
 }
 
+function captureCard(callback) {
+  var paper = document.getElementById('letter-paper');
+  // Temporarily add padding for screenshot
+  var origPad = paper.style.padding;
+  paper.style.padding = '2.5rem 2rem';
+  html2canvas(paper, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: null,
+    logging: false,
+  }).then(function(canvas) {
+    paper.style.padding = origPad;
+    callback(canvas);
+  });
+}
+
+function downloadImage() {
+  var btn = document.querySelector('[onclick="downloadImage()"]');
+  var orig = btn.textContent;
+  btn.textContent = '⏳ Proses...';
+  btn.disabled = true;
+  captureCard(function(canvas) {
+    var link = document.createElement('a');
+    link.download = 'surat-cinta.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    btn.textContent = orig;
+    btn.disabled = false;
+    showToast('Gambar tersimpan! 🌸');
+  });
+}
+
+function shareImage() {
+  var btn = document.getElementById('btn-share-img');
+  var orig = btn.textContent;
+  btn.textContent = '⏳ Proses...';
+  btn.disabled = true;
+  captureCard(function(canvas) {
+    btn.textContent = orig;
+    btn.disabled = false;
+    canvas.toBlob(function(blob) {
+      var file = new File([blob], 'surat-cinta.png', { type: 'image/png' });
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          title: 'Surat buat kamu 💌',
+          files: [file],
+        }).catch(function(){
+          // fallback: download saja
+          downloadImage();
+        });
+      } else if (navigator.share) {
+        // share text fallback
+        navigator.share({ title: 'Surat buat kamu 💌', text: lastLetter });
+      } else {
+        // download fallback
+        var link = document.createElement('a');
+        link.download = 'surat-cinta.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('Share tidak tersedia, gambar didownload! 🌸');
+      }
+    }, 'image/png');
+  });
+}
+
 function shareLetter() {
-  if (navigator.share && lastLetter) {
-    navigator.share({ title:'Surat buat kamu 💌', text: lastLetter });
-  } else {
-    copyLetter();
-  }
+  shareImage();
 }
 
 function shakeInput(id) {
