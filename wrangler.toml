@@ -1,0 +1,7 @@
+name = "imoet"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "imoet-db"
+database_id = "cf985861-2465-44f4-b693-446b54bbd11f"

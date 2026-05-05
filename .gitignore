@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# SvelteKit
+.svelte-kit/
+build/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Vite
+dist/
+.vite/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Logs
+*.log
+npm-debug.log*
+bun.lock
+
+# Wrangler
+.wrangler/
