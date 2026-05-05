@@ -29,7 +29,6 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
-bun.lock
 
 # Wrangler
 .wrangler/

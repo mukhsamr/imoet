@@ -1,39 +1,69 @@
-# imoet — AI Patch 🌸
+# imoet
 
-File-file ini adalah **tambahan / pengganti** dari project SvelteKit sebelumnya.
-Salin ke dalam project kamu dengan struktur yang sama.
+Kumpulan mini web lucu-lucuan berbasis SvelteKit, Bun, Tailwind CSS, Cloudflare Pages, OpenRouter, dan Cloudflare D1.
 
-## File yang diganti / ditambah
+## Fitur
 
+- `/cantik` - game tombol "Nggak" yang kabur.
+- `/mood` - mood tracker lokal berbasis `localStorage`.
+- `/confess` - generator surat confess memakai OpenRouter AI dan cache template di D1.
+
+## Setup Lokal
+
+Install dependency:
+
+```bash
+bun install
 ```
-package.json                              ← GANTI (tambah @google/genai)
-src/app.d.ts                              ← BARU (Cloudflare platform types)
-src/routes/api/generate/+server.ts        ← BARU (endpoint Gemini AI)
-src/routes/confess/+page.svelte           ← GANTI (pakai AI, bukan template hardcode)
+
+Buat file `.env` di root project:
+
+```bash
+OPENROUTER_API_KEY=sk-or-v1-...
+OPENROUTER_MODEL=openrouter/free
 ```
 
-## Setup setelah copy
+`OPENROUTER_MODEL` opsional. Jika kosong, endpoint memakai `openrouter/free`.
 
-1. Install dependency baru:
-   ```bash
-   npm install
-   ```
+Jalankan dev server:
 
-2. Buat file `.env` di root project:
-   ```
-   GEMINI_API_KEY=AIza_your_key_here
-   ```
-   Dapet API key gratis di: https://aistudio.google.com
+```bash
+bun run dev
+```
 
-3. Jalankan dev server:
-   ```bash
-   npm run dev
-   ```
+## Cloudflare D1
 
-## Deploy ke Cloudflare Pages
+Binding D1 didefinisikan di `wrangler.toml` sebagai `DB`.
 
-Di dashboard Cloudflare Pages → Settings → Environment Variables, tambahkan:
-- `GEMINI_API_KEY` = key kamu
+Apply schema lokal:
 
-Build command : `npm run build`
-Output directory: `.svelte-kit/cloudflare`
+```bash
+bunx wrangler d1 execute imoet-db --local --file=schema.sql
+```
+
+Apply schema remote:
+
+```bash
+bunx wrangler d1 execute imoet-db --remote --file=schema.sql
+```
+
+## Deploy Cloudflare Pages
+
+Tambahkan environment variable di Cloudflare Pages:
+
+```bash
+OPENROUTER_API_KEY=sk-or-v1-...
+OPENROUTER_MODEL=openrouter/free
+```
+
+Build command:
+
+```bash
+bun run build
+```
+
+Output directory:
+
+```bash
+.svelte-kit/cloudflare
+```

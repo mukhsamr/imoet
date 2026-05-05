@@ -2,6 +2,7 @@
   import Bubbles from "$lib/components/Bubbles.svelte";
   import BackButton from "$lib/components/BackButton.svelte";
   import Toast from "$lib/components/Toast.svelte";
+  import html2canvas from "html2canvas";
 
   // Form state
   let fromName = $state("");
@@ -103,7 +104,11 @@
       typeWriter(letterText, 0);
       spawnFloaters();
     } catch (e) {
-      showToast("Aduh, ada error nih 😅 Coba lagi ya!");
+      const message =
+        e instanceof Error && e.message
+          ? e.message
+          : "Aduh, ada error nih 😅 Coba lagi ya!";
+      showToast(message);
       phase = "form";
       loading = false;
     }
@@ -147,10 +152,7 @@
 
   async function downloadImage() {
     showToast("⏳ Memproses gambar...");
-    const { default: html2canvas } = await import(
-      "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.js" as string
-    );
-    const canvas = await (html2canvas as CallableFunction)(letterPaper, {
+    const canvas = await html2canvas(letterPaper!, {
       scale: 2,
       useCORS: true,
       backgroundColor: null,
@@ -164,10 +166,7 @@
 
   async function shareImage() {
     showToast("⏳ Memproses gambar...");
-    const { default: html2canvas } = await import(
-      "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.js" as string
-    );
-    const canvas = await (html2canvas as CallableFunction)(letterPaper, {
+    const canvas = await html2canvas(letterPaper!, {
       scale: 2,
       useCORS: true,
       backgroundColor: null,
