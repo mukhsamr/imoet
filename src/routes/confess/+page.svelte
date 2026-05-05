@@ -20,7 +20,7 @@
   let toastShow = $state(false);
   let shakeField = $state("");
   let floaters = $state<Array<{ id: number; emoji: string; left: number }>>([]);
-  let letterPaper: HTMLElement;
+  let letterPaper: HTMLElement | undefined = $state();
   let fId = 0;
 
   const styles = [
@@ -226,7 +226,7 @@
     </span>
     <h1 class="font-display text-4xl text-[#3b1f2b] leading-tight mb-2">
       Ungkapin <span
-        class="bg-gradient-to-br from-pink-400 to-purple-400 bg-clip-text text-transparent"
+        class="bg-linear-to-br from-pink-400 to-purple-400 bg-clip-text text-transparent"
       >
         Perasaan
       </span>
@@ -254,20 +254,28 @@
     </p>
     <div class="flex flex-col gap-3">
       <div>
-        <label class="block text-xs font-black text-[#8b5a6e] mb-1">
+        <label
+          for="fromName"
+          class="block text-xs font-black text-[#8b5a6e] mb-1"
+        >
           Nama kamu 🌸
         </label>
         <input
+          id="fromName"
           bind:value={fromName}
           placeholder="contoh: Rara, Dika, ..."
           class="w-full border border-pink-100 rounded-[14px] px-4 py-2.5 text-sm font-bold text-[#3b1f2b] bg-[#fffaf5] focus:border-pink-400 focus:bg-white outline-none transition-colors placeholder:text-[#c4a0b4]"
         />
       </div>
       <div>
-        <label class="block text-xs font-black text-[#8b5a6e] mb-1">
+        <label
+          for="toName"
+          class="block text-xs font-black text-[#8b5a6e] mb-1"
+        >
           Nama yang mau di-confess 💘
         </label>
         <input
+          id="toName"
           bind:value={toName}
           placeholder="contoh: Bintang, Naya, ..."
           class="w-full border border-pink-100 rounded-[14px] px-4 py-2.5 text-sm font-bold text-[#3b1f2b] bg-[#fffaf5] focus:border-pink-400 focus:bg-white outline-none transition-colors placeholder:text-[#c4a0b4] {shakeField ===
@@ -277,12 +285,16 @@
         />
       </div>
       <div>
-        <label class="block text-xs font-black text-[#8b5a6e] mb-1">
+        <label
+          for="thingAbout"
+          class="block text-xs font-black text-[#8b5a6e] mb-1"
+        >
           Hal yang kamu suka dari dia <span class="text-[#c4a0b4] font-bold">
             (opsional)
           </span>
         </label>
         <input
+          id="thingAbout"
           bind:value={thingAbout}
           placeholder="contoh: senyumnya, cara dia ketawa, ..."
           class="w-full border border-pink-100 rounded-[14px] px-4 py-2.5 text-sm font-bold text-[#3b1f2b] bg-[#fffaf5] focus:border-pink-400 focus:bg-white outline-none transition-colors placeholder:text-[#c4a0b4]"
@@ -306,7 +318,7 @@
         <button
           type="button"
           onclick={() => (selectedStyle = s.key)}
-          class="flex items-center gap-2.5 p-3 rounded-[16px] border-2 text-left transition-all hover:scale-[1.03] {selectedStyle ===
+          class="flex items-center gap-2.5 p-3 rounded-2xl border-2 text-left transition-all hover:scale-[1.03] {selectedStyle ===
           s.key
             ? 'border-pink-400 bg-pink-50'
             : 'border-pink-100 bg-[#fffaf5]'}"
@@ -326,7 +338,7 @@
     type="button"
     onclick={() => generate(false)}
     disabled={loading}
-    class="w-full py-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 text-white font-black text-base shadow-[0_5px_22px_rgba(244,114,182,0.38)] hover:-translate-y-0.5 hover:shadow-[0_10px_32px_rgba(244,114,182,0.42)] active:scale-97 transition-all disabled:opacity-50 flex items-center justify-center gap-2 mb-5"
+    class="w-full py-4 rounded-full bg-linear-to-r from-pink-400 to-purple-400 text-white font-black text-base shadow-[0_5px_22px_rgba(244,114,182,0.38)] hover:-translate-y-0.5 hover:shadow-[0_10px_32px_rgba(244,114,182,0.42)] active:scale-97 transition-all disabled:opacity-50 flex items-center justify-center gap-2 mb-5"
   >
     {#if loading}
       <span class="flex gap-1">
@@ -430,7 +442,7 @@
           <button
             type="button"
             onclick={shareImage}
-            class="py-2.5 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 text-white text-xs font-black shadow-md hover:shadow-lg transition-all"
+            class="py-2.5 rounded-full bg-linear-to-r from-pink-400 to-purple-400 text-white text-xs font-black shadow-md hover:shadow-lg transition-all"
           >
             💌 Share gambar!
           </button>

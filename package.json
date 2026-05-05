@@ -2,6 +2,11 @@
   "name": "imoet",
   "version": "1.0.0",
   "private": true,
+  "overrides": {
+    "undici": "^6.23.0",
+    "esbuild": "^0.25.0",
+    "cookie": "^0.7.0"
+  },
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -11,18 +16,18 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260505.1",
-    "@sveltejs/adapter-cloudflare": "^4.0.0",
-    "@sveltejs/kit": "^2.59.0",
-    "@sveltejs/vite-plugin-svelte": "^7.0.0",
-    "@tailwindcss/vite": "^4.0.0",
+    "@sveltejs/adapter-cloudflare": "^7.2.8",
+    "@sveltejs/kit": "^2.59.1",
+    "@sveltejs/vite-plugin-svelte": "^7.1.0",
+    "@tailwindcss/vite": "^4.2.4",
     "svelte": "^5.55.5",
-    "svelte-check": "^4.0.0",
-    "tailwindcss": "^4.0.0",
-    "typescript": "^5.0.0",
-    "vite": "^8.0.0"
+    "svelte-check": "^4.4.8",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.10"
   },
   "dependencies": {
-    "@google/genai": "^1.51.0"
+    "@google/genai": "^1.52.0"
   },
   "type": "module"
 }
