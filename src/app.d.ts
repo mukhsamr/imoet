@@ -8,6 +8,10 @@ declare global {
         OPENROUTER_MODEL: string;
         DB: D1Database;
       };
+      context: {
+        waitUntil(promise: Promise<any>): void;
+      };
+      caches: CacheStorage & { default: Cache };
     }
   }
 }

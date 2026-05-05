@@ -1,4 +1,4 @@
-import { OPENROUTER_API_KEY, OPENROUTER_MODEL } from '$env/static/private';
+import { env } from "$env/dynamic/private";
 import type { RequestHandler } from './$types';
 
 const STYLE_PROMPTS: Record<string, string> = {
@@ -9,9 +9,9 @@ const STYLE_PROMPTS: Record<string, string> = {
 };
 
 export const POST: RequestHandler = async ({ request, platform }) => {
-  const apiKey = OPENROUTER_API_KEY ?? platform?.env?.OPENROUTER_API_KEY;
-  const model = OPENROUTER_MODEL ?? platform?.env?.OPENROUTER_MODEL ?? 'openrouter/free';
-  const db = platform?.env?.DB;
+  const apiKey = env.OPENROUTER_API_KEY
+  const model = env.OPENROUTER_MODEL ?? 'openrouter/free';
+  const db = platform?.env?.DB;;
 
   if (!apiKey) {
     return new Response('OPENROUTER_API_KEY tidak ditemukan', { status: 500 });

@@ -1,7 +1,15 @@
-<script>
-  import { onMount } from 'svelte';
-  let bubbles = [];
-  const colors = ['#ffc8e0','#f783b0','#ddd6fe','#fef9c3','#fce7f3','#ccfbf1'];
+<script lang="ts">
+  import { onMount } from "svelte";
+
+  let bubbles: any[] = $state([]);
+  const colors = [
+    "#ffc8e0",
+    "#f783b0",
+    "#ddd6fe",
+    "#fef9c3",
+    "#fce7f3",
+    "#ccfbf1",
+  ];
 
   onMount(() => {
     bubbles = Array.from({ length: 12 }, () => ({

@@ -1,6 +1,6 @@
-<script>
-  export let href = '/';
-  export let label = '← Balik ke beranda';
+<script lang="ts">
+  export let href: string = "/";
+  export let label: string = "← Balik ke beranda";
 </script>
 
 <a

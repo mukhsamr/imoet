@@ -1,6 +1,6 @@
-<script>
-  export let message = '';
-  export let show = false;
+<script lang="ts">
+  export let message: string = "";
+  export let show: boolean = false;
 </script>
 
 {#if show}
