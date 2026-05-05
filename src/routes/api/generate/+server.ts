@@ -1,4 +1,3 @@
-import { env } from "$env/dynamic/private";
 import type { RequestHandler } from './$types';
 
 const STYLE_PROMPTS: Record<string, string> = {
@@ -9,8 +8,8 @@ const STYLE_PROMPTS: Record<string, string> = {
 };
 
 export const POST: RequestHandler = async ({ request, platform }) => {
-  const apiKey = env.OPENROUTER_API_KEY
-  const model = env.OPENROUTER_MODEL ?? 'openrouter/free';
+  const apiKey = platform?.env?.OPENROUTER_API_KEY;
+  const model = platform?.env?.OPENROUTER_MODEL || "openrouter/free";
   const db = platform?.env?.DB;;
 
   if (!apiKey) {
