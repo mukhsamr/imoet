@@ -58,7 +58,7 @@
     receh: "😂 ✦ 💕 ✦ 😂",
   };
 
-  async function generate() {
+  async function generate(forceNew = false) {
     if (!toName.trim()) {
       shakeField = "to";
       setTimeout(() => (shakeField = ""), 500);
@@ -80,6 +80,7 @@
           to: toName.trim(),
           thing: thingAbout.trim(),
           style: selectedStyle,
+          forceNew,
         }),
       });
       if (!res.ok) throw new Error(await res.text());
@@ -323,7 +324,7 @@
   <!-- Generate button -->
   <button
     type="button"
-    onclick={generate}
+    onclick={() => generate(false)}
     disabled={loading}
     class="w-full py-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-400 text-white font-black text-base shadow-[0_5px_22px_rgba(244,114,182,0.38)] hover:-translate-y-0.5 hover:shadow-[0_10px_32px_rgba(244,114,182,0.42)] active:scale-97 transition-all disabled:opacity-50 flex items-center justify-center gap-2 mb-5"
   >
@@ -407,7 +408,7 @@
         <div class="grid grid-cols-2 gap-2">
           <button
             type="button"
-            onclick={generate}
+            onclick={() => generate(true)}
             class="py-2.5 rounded-full border-2 border-pink-200 bg-pink-50 text-[#8b5a6e] text-xs font-black hover:bg-pink-100 transition-all"
           >
             🔄 Ganti versi

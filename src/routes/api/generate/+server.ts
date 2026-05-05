@@ -17,8 +17,8 @@ export const POST: RequestHandler = async ({ request, platform }) => {
     return new Response('OPENROUTER_API_KEY tidak ditemukan', { status: 500 });
   }
 
-  const { from, to, thing, style } = await request.json() as {
-    from: string; to: string; thing: string; style: string;
+  const { from, to, thing, style, forceNew = false } = await request.json() as {
+    from: string; to: string; thing: string; style: string; forceNew?: boolean;
   };
 
   if (!to?.trim()) {
@@ -27,10 +27,9 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
   const thingText = thing?.trim() || 'semua hal tentang dirinya';
   const styleGuide = STYLE_PROMPTS[style] ?? STYLE_PROMPTS.manis;
-  const newVersion = Math.random() < 0.5;
 
   // Cek cache D1 dulu (kecuali user minta "ganti versi")
-  if (db && !newVersion) {
+  if (db && !forceNew) {
     const cached = await db
       .prepare('SELECT content FROM letters WHERE style = ? ORDER BY RANDOM() LIMIT 1')
       .bind(style)
